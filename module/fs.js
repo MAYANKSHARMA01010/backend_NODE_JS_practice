@@ -14,6 +14,8 @@ console.log('File overwritten successfully.');
 
 
 // Reading the content of the file
+// it will give output as BUFFER
+// type of buffer is OBJECT
 const data = fs.readFileSync('fsFile.txt');
 console.log('Reading the file without encoding');
 console.log(data);

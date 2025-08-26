@@ -1,0 +1,2 @@
+This is the result form ASYNC:
+This is a.txt fileThis is b.txt fileThis is c.txt file

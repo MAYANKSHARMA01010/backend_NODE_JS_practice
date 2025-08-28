@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Futuristic UI — Landing</title>
+  <meta name="description" content="A sleek futuristic landing page with neon gradients, glassmorphism and smooth micro-interactions." />
+
+  <style>
+    /* CSS Variables */
+    :root{
+      --bg-1: #030617;
+      --bg-2: #07102a;
+      --glass: rgba(255,255,255,0.04);
+      --accent-1:  #00f0ff; /* cyan */
+      --accent-2:  #9b5cff; /* magenta */
+      --muted: #aab3cf;
+      --glass-border: rgba(255,255,255,0.06);
+      --radius: 14px;
+      --ff: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    /* Reset and base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ff);
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(155,92,255,0.08), transparent 8%),
+                  radial-gradient(800px 400px at 90% 90%, rgba(0,240,255,0.05), transparent 8%),
+                  linear-gradient(180deg,var(--bg-1), var(--bg-2));
+      color:#e7eefc;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:scroll;
+    }
+
+    /* Subtle animated starry noise */
+    .noise{
+      position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity:0.6;mix-blend-mode:overlay;
+      animation: drift 30s linear infinite;
+    }
+    @keyframes drift{from{transform:translateY(0)}to{transform:translateY(-200px)}}
+
+    /* Container */
+    .container{max-width:1180px;margin:0 auto;padding:36px 20px;position:relative;z-index:10}
+
+    /* Navbar */
+    header{backdrop-filter: blur(6px);border-bottom:1px solid var(--glass-border);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);position:sticky;top:12px;margin:12px;border-radius:20px;padding:12px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(155,92,255,0.12), 0 2px 6px rgba(0,240,255,0.06)}
+    .logo svg{filter:drop-shadow(0 6px 14px rgba(155,92,255,0.18))}
+    .brand h1{font-size:16px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a:hover{color:#fff;background:linear-gradient(90deg, rgba(0,240,255,0.06), rgba(155,92,255,0.06));backdrop-filter: blur(4px)}
+
+    .cta{padding:8px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#021022;font-weight:700}
+
+    /* Mobile nav toggle */
+    .burger{display:none;cursor:pointer;padding:8px;border-radius:10px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:72px 0}
+    .hero h2{font-size:44px;line-height:1.02;margin:0 0 12px}
+    .hero p.lead{margin:0 0 22px;color:var(--muted);max-width:60%}
+    .hero .actions{display:flex;gap:12px}
+    .glass-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border);border-radius:var(--radius);padding:18px;box-shadow:0 10px 30px rgba(2,16,34,0.6)}
+
+    /* Neon panel (right) */
+    .panel{padding:22px;border-radius:14px;background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+    .metrics{display:flex;flex-direction:column;gap:14px}
+    .metric{display:flex;justify-content:space-between;align-items:center}
+    .metric strong{font-size:20px}
+    .spark{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));width:60%}
+
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:30px 0}
+    .feature{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--glass-border)}
+    .feature h3{margin:0 0 8px}
+    .feature p{margin:0;color:var(--muted);font-size:14px}
+
+    /* CTA band */
+    .cta-band{margin:28px 0;padding:22px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(90deg, rgba(0,240,255,0.04), rgba(155,92,255,0.03));border:1px solid var(--glass-border)}
+
+    /* Footer */
+    footer{margin-top:44px;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(0,0,0,0.15), transparent);border-top:1px solid var(--glass-border);display:flex;justify-content:space-between;gap:20px;align-items:center}
+    footer small{color:var(--muted)}
+
+    /* Utilities */
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;font-weight:700;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--glass-border)}
+
+    /* Micro interactions */
+    a, button{transition:all 220ms cubic-bezier(.2,.9,.2,1)}
+    .card-hover:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(2,16,34,0.6)}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .hero p.lead{max-width:100%}
+      .features{grid-template-columns:repeat(2,1fr)}
+      nav ul{display:none}
+      .burger{display:block}
+    }
+    @media (max-width:600px){
+      .features{grid-template-columns:1fr}
+    }
+
+    /* Fancy scrollbar */
+    ::-webkit-scrollbar{width:10px}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent-2),var(--accent-1));border-radius:999px}
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="container">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <!-- simple glyph -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="4" fill="white" fill-opacity="0.12"/><path d="M6 12h12M12 6v12" stroke="white" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h1>NovaGrid</h1>
+            <p>interface for the near-future</p>
+          </div>
+        </div>
+
+        <nav aria-label="Main Navigation">
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a class="cta" href="#get">Get Started</a></li>
+          </ul>
+        </nav>
+
+        <button class="burger" id="burger" aria-expanded="false" aria-label="Open menu">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="pill">alpha · experimental</p>
+          <h2 id="hero-title">A sleek, responsive UI for a future that feels alive</h2>
+          <p class="lead">Harness neon gradients, glass-like panels and motion that’s tasteful — built to showcase products, apps, and concepts with presence and speed.</p>
+
+          <div class="actions">
+            <a class="cta" href="#get">Try the demo</a>
+            <a class="glass-card" href="#how">See how it works</a>
+          </div>
+
+          <div style="height:20px"></div>
+
+          <div style="display:flex;gap:12px;align-items:center;margin-top:10px" class="glass-card">
+            <div style="flex:1">
+              <small style="color:var(--muted)">Realtime Uptime</small>
+              <div style="display:flex;align-items:center;gap:12px;margin-top:6px">
+                <strong style="font-size:20px">99.98%</strong>
+                <div style="flex:1;background:linear-gradient(90deg, rgba(255,255,255,0.03), transparent);height:8px;border-radius:999px;overflow:hidden">
+                  <div style="height:8px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));width:85%"></div>
+                </div>
+              </div>
+            </div>
+            <div style="width:2px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);height:44px;border-radius:4px"></div>
+            <div style="min-width:130px;text-align:right">
+              <small style="color:var(--muted)">Active Connections</small>
+              <div style="font-weight:800;font-size:18px;margin-top:6px">4,160</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel glass-card" aria-label="Quick metrics">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div>
+              <small style="color:var(--muted)">Live Stream</small>
+              <div style="font-weight:900;font-size:18px">Latency <span style="color:var(--muted);font-weight:600">24ms</span></div>
+            </div>
+            <div style="text-align:right">
+              <small style="color:var(--muted)">Load</small>
+              <div style="font-weight:900;font-size:18px">72%</div>
+            </div>
+          </div>
+
+          <div class="metrics">
+            <div class="metric"><div style="color:var(--muted)">Throughput</div><strong>1.9k/s</strong></div>
+            <div class="metric"><div style="color:var(--muted)">Errors</div><strong>0.02%</strong></div>
+            <div class="metric"><div style="color:var(--muted)">AI Ops</div><strong>Enabled</strong></div>
+          </div>
+
+          <div style="height:12px"></div>
+          <button class="cta" style="width:100%">Open Dashboard</button>
+        </aside>
+      </section>
+
+      <section id="features">
+        <h3 style="margin:0 0 12px">Core Features</h3>
+        <div class="features">
+          <article class="feature card-hover">
+            <h3>Adaptive Layouts</h3>
+            <p>Automatically scales to device form factors while preserving motion and hierarchy.</p>
+          </article>
+
+          <article class="feature card-hover">
+            <h3>Neon Gradients</h3>
+            <p>Sensory gradients with subtle glow make content readable and modern at once.</p>
+          </article>
+
+          <article class="feature card-hover">
+            <h3>Glassmorphism</h3>
+            <p>Polished translucent surfaces provide depth without clutter.</p>
+          </article>
+
+          <article class="feature card-hover">
+            <h3>Accessibility-First</h3>
+            <p>High contrast controls, keyboard-friendly navigation, and clear focus states.</p>
+          </article>
+
+          <article class="feature card-hover">
+            <h3>Fast & Lightweight</h3>
+            <p>Built with CSS-first principles so small bundles and fast paint times are default.</p>
+          </article>
+
+          <article class="feature card-hover">
+            <h3>Composable Components</h3>
+            <p>Reusable UI building blocks for product teams and creative portfolios.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cta-band" id="get">
+        <div>
+          <h4 style="margin:0">Ready to step into the future?</h4>
+          <small style="color:var(--muted)">Get a 14‑day trial. No credit card required.</small>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <a class="cta" href="#">Start Free</a>
+          <a class="glass-card" href="#pricing">See Pricing</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>
+        <strong>NovaGrid</strong>
+        <div style="color:var(--muted);font-size:13px">© <span id="year"></span> NovaGrid Inc.</div>
+      </div>
+
+      <small>Built with purpose — responsive, accessible, and futuristic.</small>
+    </footer>
+  </div>
+
+  <script>
+    // Small interactive bits
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const burger = document.getElementById('burger');
+    burger && burger.addEventListener('click', ()=>{
+      const nav = document.querySelector('nav ul');
+      const expanded = burger.getAttribute('aria-expanded') === 'true';
+      burger.setAttribute('aria-expanded', !expanded);
+      if(nav.style.display === 'flex') nav.style.display = 'none'; else nav.style.display = 'flex';
+    });
+
+    // Link smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id === '#') return;
+        const el = document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+      })
+    });
+  </script>
+</body>
+</html>

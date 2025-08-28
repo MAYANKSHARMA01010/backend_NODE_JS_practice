@@ -10,6 +10,7 @@
   "keywords": [],
   "description": "",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "figlet": "^1.8.2"
   }
 }

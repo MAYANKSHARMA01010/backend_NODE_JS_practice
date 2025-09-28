@@ -6,12 +6,12 @@ const {
     Subtract,
     Multiply,
     Divide,
-} = require('./module/localModules.js'); // local module imported
+} = require('./module/other/localModules.js'); // local module imported
 const figlet = require('figlet'); // figlet is a third-party module
 const {
     process,
     processArgv,
-} = require('./module/process.js'); // process is a local module
+} = require('./module/process/process.js'); // process is a local module
 
 // fs.writeFileSync use create a file (fileName, data(optional))
 fs.writeFileSync('node.txt','Hurray!!! We have learned how to import inBuild modules')
